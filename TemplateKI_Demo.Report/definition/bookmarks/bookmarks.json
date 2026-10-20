@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "Bookmarkf258459d7858912313cd",
+      "displayName": "Showcase",
+      "children": [
+        "Bookmarke9819591c0d0d0345c78",
+        "Bookmark3088335dc3b280078ca2",
+        "Bookmark027d2910099020020c4b",
+        "Bookmark982d2fc12d62a9068a6a",
+        "71885216ed845655a46b",
+        "Bookmark498613d3ad8613bb5503",
+        "Bookmark2cbb32205c58c7808937"
+      ]
+    },
+    {
+      "name": "3dd8413bd4a595bf44c8",
+      "displayName": "Doku",
+      "children": [
+        "87f7a83aec36b719783f",
+        "23c7f0bccd1277a4e510",
+        "1d568639762d7449c572"
+      ]
+    },
+    {
+      "name": "ab1ecabf1dcc5c38527e",
+      "displayName": "Page1",
+      "children": [
+        "5644dc9b099c17b8b998",
+        "c8cb3830016a88a57ae7"
+      ]
+    },
+    {
+      "name": "b382470e30b26be2d8b8",
+      "displayName": "Page2",
+      "children": [
+        "ae94364830b7e0160275",
+        "9359fd4886a45a92ba99"
+      ]
+    },
+    {
+      "name": "228df48d8490b900821d",
+      "displayName": "Page3",
+      "children": [
+        "280921d46569b71a24ec",
+        "bc5afeef2ea37b5a3039"
+      ]
+    },
+    {
+      "name": "42c896b96728b3b3a04b",
+      "displayName": "Page4",
+      "children": [
+        "f4fe697874251b85a100",
+        "fde2afa6052e06b1d522"
+      ]
+    },
+    {
+      "name": "75ec0d3fd7a7c12323d5",
+      "displayName": "Page5",
+      "children": [
+        "1bc05a1c648660e2219d",
+        "c4a12bc59a1090d9ad49"
+      ]
+    }
+  ]
+}

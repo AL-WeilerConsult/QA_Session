@@ -1,0 +1,5 @@
+relationship Fakt_movies_Release_Date_Dates_Date
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fakt_movies.Release_Date
+	toColumn: Dates.Date
+

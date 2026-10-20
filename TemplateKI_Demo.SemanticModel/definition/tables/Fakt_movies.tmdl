@@ -1,0 +1,125 @@
+table Fakt_movies
+	lineageTag: 871620ea-d958-45e9-b0f0-128209670ff8
+
+	column Release_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 58eb307f-0ad7-40d8-ac96-473302e8ad36
+		summarizeBy: none
+		sourceColumn: Release_Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column title_name
+		dataType: string
+		lineageTag: 4c272c70-4bd3-4165-820e-8e7768ad53d3
+		summarizeBy: none
+		sourceColumn: title_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Overview
+		dataType: string
+		lineageTag: 1b44c57c-4343-4652-af5a-c93dbd005a28
+		summarizeBy: none
+		sourceColumn: Overview
+
+		annotation SummarizationSetBy = Automatic
+
+	column Popularity
+		dataType: double
+		lineageTag: 9ce72ea1-9fde-4c1c-927d-d9703da2ea6b
+		summarizeBy: sum
+		sourceColumn: Popularity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Vote_Count
+		dataType: int64
+		formatString: 0
+		lineageTag: 499e7a84-2022-43f4-a6a1-1856003ceb21
+		summarizeBy: sum
+		sourceColumn: Vote_Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vote_Average
+		dataType: double
+		lineageTag: 1f194864-017e-4dc4-9df8-bc3a0d02cd14
+		summarizeBy: sum
+		sourceColumn: Vote_Average
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Original_Language
+		dataType: string
+		lineageTag: 3b4623bf-4bcc-4397-94c1-681189cc08a1
+		summarizeBy: none
+		sourceColumn: Original_Language
+
+		annotation SummarizationSetBy = Automatic
+
+	column Genre
+		dataType: string
+		lineageTag: 5cc11c85-93f7-4200-a648-d8f387ef4db8
+		summarizeBy: none
+		sourceColumn: Genre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Poster_Url
+		dataType: string
+		lineageTag: 64e4e886-2a5a-46ab-aec2-0aa0bc4b3f1f
+		summarizeBy: none
+		sourceColumn: Poster_Url
+
+		annotation SummarizationSetBy = Automatic
+
+	column Umsatz
+		dataType: int64
+		formatString: 0
+		lineageTag: ac7f3b1a-4193-4b22-88dc-e784156dc303
+		summarizeBy: sum
+		sourceColumn: Umsatz
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Movie ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0269c355-3df8-45af-b6fd-b02ee9530c02
+		summarizeBy: count
+		sourceColumn: Movie ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fakt_movies = m
+		mode: import
+		queryGroup: '1 - Final Tables'
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\AngelinaLeib\weilerconsult.de\Steffen Weiler - 01_Austausch Weilerconsult\Power BI & KI Kurs\Downloadordner Power BI & KI Kurs\movies.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Replaced Value" = Table.ReplaceValue(#"Promoted Headers",".",",",Replacer.ReplaceText,{"Vote_Average"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"Vote_Average", type number}, {"Vote_Count", Int64.Type}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type",".",",",Replacer.ReplaceText,{"Popularity"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{"Popularity", type number}, {"Umsatz", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Title", "title_name"}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns",{{"Release_Date", type date}}),
+				    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Changed Type2", {"Release_Date"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Errors", "Index", 1, 1, Int64.Type),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index", "Release_Date", "title_name", "Overview", "Popularity", "Vote_Count", "Vote_Average", "Original_Language", "Genre", "Poster_Url", "Umsatz"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Reordered Columns",{{"Index", "Movie ID"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

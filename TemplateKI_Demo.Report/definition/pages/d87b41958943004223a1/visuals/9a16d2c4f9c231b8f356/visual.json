@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "9a16d2c4f9c231b8f356",
+  "position": {
+    "x": 35.129546493473214,
+    "y": 119.28252509415694,
+    "z": 1000,
+    "height": 58,
+    "width": 1845.3855656600235,
+    "tabOrder": 0
+  },
+  "visualGroup": {
+    "displayName": "Main Filters",
+    "groupMode": "ScaleMode",
+    "objects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
