@@ -4,8 +4,8 @@ table _Measures
 	measure Test = "Test"
 		lineageTag: 132d96ca-751a-4c27-9ffb-e28642d94fb6
 
-	/// Durchschnittliche Bewertung der Filme auf Basis von Vote_Average. Filme ohne Bewertung (leere Werte) fließen nicht in den Durchschnitt ein.
-	measure Durchschnittsbewertung = AVERAGE(Fakt_movies[Vote_Average])
+	/// Durchschnittliche Bewertung der Filme auf Basis von Vote_Average. Berücksichtigt nur Filme mit mindestens 100 Bewertungen (Vote_Count), damit Filme mit wenigen Einzelbewertungen das Ergebnis nicht verzerren. Filme ohne Bewertung (leere Werte) fließen nicht in den Durchschnitt ein.
+	measure Durchschnittsbewertung = CALCULATE(AVERAGE(Fakt_movies[Vote_Average]), KEEPFILTERS(Fakt_movies[Vote_Count] >= 100))
 		formatString: 0.0
 		displayFolder: 01 Basis-KPIs
 		lineageTag: 28c6c874-7669-4096-bfd2-7df331ead3dc
