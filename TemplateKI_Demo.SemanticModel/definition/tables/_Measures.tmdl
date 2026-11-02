@@ -4,6 +4,12 @@ table _Measures
 	measure Test = "Test"
 		lineageTag: 132d96ca-751a-4c27-9ffb-e28642d94fb6
 
+	/// Durchschnittlicher Umsatz je Film: Summe des Umsatzes geteilt durch die Anzahl unterschiedlicher Filme (Movie ID). Liefert leer statt Fehler, wenn keine Filme im Filterkontext sind.
+	measure 'Umsatz pro Film' = DIVIDE(SUM(Fakt_movies[Umsatz]), DISTINCTCOUNT(Fakt_movies[Movie ID]))
+		formatString: #,0 €
+		displayFolder: 01 Basis-KPIs
+		lineageTag: 278540d0-6320-421c-9eac-d0ed9904e68e
+
 	partition _Measures = m
 		mode: import
 		queryGroup: '4 - Template/Intern'
